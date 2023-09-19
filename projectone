@@ -30,14 +30,14 @@ class Blockchain:
         novo_bloco.hash = novo_bloco.calcular_hash()
         self.chain.append(novo_bloco)
 
-# Cria uma instância da blockchain
+ ==== Cria uma instância da blockchain ====
 blockchain = Blockchain()
 
 # Adiciona alguns blocos de exemplo
 blockchain.adicionar_bloco(Bloco(None, None, "Primeira transação", None))
 blockchain.adicionar_bloco(Bloco(None, None, "Segunda transação", None))
 
-# Exibe os blocos da blockchain
+==== Exibe os blocos da blockchain ====
 for bloco in blockchain.chain:
     print(f"Índice: {bloco.indice}")
     print(f"Carimbo de Tempo: {bloco.carimbo_tempo}")

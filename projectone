@@ -33,7 +33,7 @@ class Blockchain:
  ==== Cria uma instância da blockchain ====
 blockchain = Blockchain()
 
-# Adiciona alguns blocos de exemplo
+==== Adiciona alguns blocos de exemplo ====
 blockchain.adicionar_bloco(Bloco(None, None, "Primeira transação", None))
 blockchain.adicionar_bloco(Bloco(None, None, "Segunda transação", None))
 

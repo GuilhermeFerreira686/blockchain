@@ -1,0 +1,47 @@
+import hashlib
+import time
+
+class Bloco:
+    def __init__(self, indice, carimbo_tempo, dados, hash_anterior):
+        self.indice = indice
+        self.carimbo_tempo = carimbo_tempo
+        self.dados = dados
+        self.hash_anterior = hash_anterior
+        self.hash = self.calcular_hash()
+
+    def calcular_hash(self):
+        dados_concatenados = str(self.indice) + str(self.carimbo_tempo) + str(self.dados) + str(self.hash_anterior)
+        return hashlib.sha256(dados_concatenados.encode()).hexdigest()
+
+class Blockchain:
+    def __init__(self):
+        self.chain = [self.criar_primeiro_bloco()]
+
+    def criar_primeiro_bloco(self):
+        return Bloco(0, time.time(), "Bloco Gênesis", "0")
+
+    def obter_ultimo_bloco(self):
+        return self.chain[-1]
+
+    def adicionar_bloco(self, novo_bloco):
+        novo_bloco.indice = len(self.chain)
+        novo_bloco.carimbo_tempo = time.time()
+        novo_bloco.hash_anterior = self.obter_ultimo_bloco().hash
+        novo_bloco.hash = novo_bloco.calcular_hash()
+        self.chain.append(novo_bloco)
+
+# Cria uma instância da blockchain
+blockchain = Blockchain()
+
+# Adiciona alguns blocos de exemplo
+blockchain.adicionar_bloco(Bloco(None, None, "Primeira transação", None))
+blockchain.adicionar_bloco(Bloco(None, None, "Segunda transação", None))
+
+# Exibe os blocos da blockchain
+for bloco in blockchain.chain:
+    print(f"Índice: {bloco.indice}")
+    print(f"Carimbo de Tempo: {bloco.carimbo_tempo}")
+    print(f"Dados: {bloco.dados}")
+    print(f"Hash Anterior: {bloco.hash_anterior}")
+    print(f"Hash: {bloco.hash}")
+    print("\n")
